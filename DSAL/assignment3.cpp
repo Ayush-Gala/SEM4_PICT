@@ -88,6 +88,7 @@ public:
 
     void createTree();
     void InorderTraversal(Node *);
+    void PreorderTraversal(Node *);
 };
 
 void TBT ::createTree()
@@ -181,6 +182,45 @@ void TBT ::InorderTraversal(Node *p)
     return;
 }
 
+void TBT :: PreorderTraversal(Node *p)
+{
+    int count = header->data;
+    p = p->lchild;
+    cout<< p->data << ", ";
+    count--;
+    while (p != header)
+    {
+        while (p->lbit)
+        {
+            p = p->lchild;
+            cout << p->data << ", ";
+            count--; 
+        }
+        if (p->rbit)
+        {
+            p = p->rchild;
+            cout << p->data << ", ";
+            count--;
+            
+            continue;
+        }
+        else
+        {
+            while (!p->rbit && p->rchild != header)
+            {
+                p = p->rchild;
+            }
+            p = p->rchild;
+            if(p!=header)
+            {
+                cout << p->data << ", ";
+                count--;
+            }
+        }
+    }
+    return;
+}
+
 int main()
 {
     TBT t1;
@@ -203,7 +243,9 @@ int main()
 
         case 2:
         {
-            cout << "Case not coded yet lmao lolololol" << endl;
+            cout << "Preorder traversal is -[";
+            t1.PreorderTraversal(t1.header);
+            cout<<"\b\b]";
             break;
         }
 
